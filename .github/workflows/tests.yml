@@ -1,12 +1,26 @@
 name: tests
+
 on: [push, pull_request]
+
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-      - run: pip install numpy pandas scikit-learn pyyaml pytest
-      - run: pytest
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy pandas scikit-learn pyyaml pytest
+
+      - name: Run pytest
+        run: python -m pytest -v
+        env:
+          PYTHONPATH: ${{ github.workspace }}
