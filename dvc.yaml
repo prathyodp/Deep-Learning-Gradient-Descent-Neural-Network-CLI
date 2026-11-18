@@ -1,0 +1,23 @@
+stages:
+  train:
+    cmd: python -m src.cli train --backend ${training.backend} --model ${training.model} --epochs ${training.epochs} --learning-rate ${training.learning_rate} --hidden ${training.hidden} --activation ${training.activation} --seed ${seed} --samples ${data.samples} --noise ${data.noise} --test-size ${data.test_size}
+    deps:
+      - src/
+      - data/
+    params:
+      - seed
+      - data.samples
+      - data.noise
+      - data.test_size
+      - training.backend
+      - training.model
+      - training.epochs
+      - training.learning_rate
+      - training.hidden
+      - training.activation
+    outs:
+      - artifacts/model.json
+      - artifacts/test_predictions.csv
+    metrics:
+      - artifacts/run.json:
+          cache: false

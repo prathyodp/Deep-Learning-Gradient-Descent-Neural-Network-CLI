@@ -1,0 +1,5 @@
+training:
+  learning_rates: [0.01, 0.03, 0.08]
+  epochs: [200, 400]
+  hidden_sizes: [8, 16]
+  activations: [relu, tanh]

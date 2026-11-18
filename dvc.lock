@@ -1,0 +1,42 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python -m src.cli train --backend numpy --model linear --epochs 300 
+      --learning-rate 0.03 --hidden 16 --activation tanh --seed 42 --samples 500
+      --noise 0.15 --test-size 0.2
+    deps:
+    - path: data/
+      hash: md5
+      md5: ae2fc90d50edae2a12d35d1896f23ad8.dir
+      size: 38892
+      nfiles: 3
+    - path: src/
+      hash: md5
+      md5: 02e1ae660bb77a3e121950d233e99add.dir
+      size: 22514
+      nfiles: 11
+    params:
+      params.yaml:
+        data.noise: 0.15
+        data.samples: 500
+        data.test_size: 0.2
+        seed: 42
+        training.activation: tanh
+        training.backend: numpy
+        training.epochs: 300
+        training.hidden: 16
+        training.learning_rate: 0.03
+        training.model: linear
+    outs:
+    - path: artifacts/model.json
+      hash: md5
+      md5: 38197c0b6dcf180a019bef022d338488
+      size: 291
+    - path: artifacts/run.json
+      hash: md5
+      md5: 1c359d0e471aa95a28eef6daa05492af
+      size: 377
+    - path: artifacts/test_predictions.csv
+      hash: md5
+      md5: 6b88effc869b8f477160d041b51193e9
+      size: 5195
